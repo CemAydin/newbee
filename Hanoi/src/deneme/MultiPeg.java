@@ -2,7 +2,7 @@ package deneme;
 
 import java.util.Scanner;
 
-public class kule {
+public class MultiPeg {
 
     public static void main(String[] args) {
 
