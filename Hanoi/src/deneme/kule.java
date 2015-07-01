@@ -1,8 +1,3 @@
-
-
-
-
-
 package deneme;
 
 import java.util.Scanner;
@@ -127,16 +122,5 @@ public class kule {
         }
         return s - boy;
     }
-   
-    //validation
-   
+    //validation   
 }
-
-
-
-
-
-
-
-
-
