@@ -86,9 +86,9 @@ public class Multipeg {
         b = lengthFind(dst);
 
         if (b == 0) {
-      System.out.println("\n" + src[a - 1] + "degeri" + (dst[b]) + " üzeine tasindi");
+      System.out.println("\n" + src[a - 1] + "degeri" + (dst[b]) + " üzerine tasindi");
         } else {
-       System.out.println("\n" + src[a - 1] + "degeri" + (dst[b - 1]) + " üzeine tasindi");
+       System.out.println("\n" + src[a - 1] + "degeri" + (dst[b - 1]) + " üzerine tasindi");
         }
 
         dst[b] = src[a - 1];//değeri taşıdık.
