@@ -17,13 +17,13 @@ public class Multipeg {
         int[] immediate1 = new int[n];
         int[] immediate2 = new int[n];
         int[] dest = new int[n];
-        // Kulelerin içi hazırlanıyor.
-       
+        
+       // Kulelerin içi hazırlanıyor.
         for (int i = n - 1; i > -1; i--) {
             source[i] = n - i;
         }
-        //diziler ilk değerlerle doldurulur.
         
+        //diziler ilk değerlerle doldurulur.
         arrayFill(immediate1);
         arrayFill(immediate2);
         arrayFill(dest);
