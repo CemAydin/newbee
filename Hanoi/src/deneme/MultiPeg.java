@@ -12,46 +12,27 @@ public class Multipeg {
         Scanner konsole = new Scanner(System.in);
         int n = konsole.nextInt();
        
-       
-
         // Kuleleri temsil edecek diziler oluşturuluyor.
         int[] source = new int[n];
         int[] immediate1 = new int[n];
         int[] immediate2 = new int[n];
         int[] dest = new int[n];
-
         // Kulelerin içi hazırlanıyor.
+       
         for (int i = n - 1; i > -1; i--) {
             source[i] = n - i;
         }
-       
-       
-       
-       
-       
-       
-       
         //diziler ilk değerlerle doldurulur.
+        
         arrayFill(immediate1);
         arrayFill(immediate2);
         arrayFill(dest);
        
-
-  
       allWrite(source, immediate1, immediate2, dest);//ilk değerler ekrana yazdırılır
-      
-       
-       
-        move(n, source, immediate1, immediate2, dest);
-       
-       
-              
-     allWrite(source,immediate1, immediate2, dest);//son değerler ekrana yazırılır
-   
+      move(n, source, immediate1, immediate2, dest);
+      allWrite(source,immediate1, immediate2, dest);//son değerler ekrana yazdırılır
       
 }
-   
-
     private static void allWrite(int[] src, int[] immd1, int[] immd2, int[] dst) {
         write(src);
         write(immd1);
@@ -84,7 +65,7 @@ public class Multipeg {
         int a, b;
         a = lengthFind(src);
         b = lengthFind(dst);
-
+        
         if (b == 0) {
       System.out.println("\n" + src[a - 1] + "degeri" + (dst[b]) + " üzerine tasindi");
         } else {
@@ -97,8 +78,6 @@ public class Multipeg {
         control(dst);
     }//diski tasir.
 
-   
-
     public static int lengthFind(int[] a) {
         int s, t, boy = 0;
         s = a.length;
@@ -108,7 +87,6 @@ public class Multipeg {
         }
         return s - boy;
     }//direkteki disk sayısını döndürür.
-
 
 
     public static void move(int n, int[] src, int[] immd1, int[] immd2, int[] dst) {
@@ -121,10 +99,11 @@ public class Multipeg {
 
         } else {
             move(n - 2, src, immd2, dst, immd1);
+            
             assign(src, immd2);
             assign(src, dst);
             assign(immd2, dst);
-
+            
             move(n - 2, immd1, src, immd2, dst);
         }
     }//direklerde dolaşım sağlar.
