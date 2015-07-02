@@ -1,88 +1,105 @@
-package deneme;
+package edu.gakalsiya.hanoi;
 
 import java.util.Scanner;
 
-public class MultiPeg {
+
+public class Multipeg {
 
     public static void main(String[] args) {
 
         // Disk sayısını belirler.
-        System.out.println("Kule büyüklügünü giriniz.");
+      System.out.println("Kule büyüklügünü giriniz.");
         Scanner konsole = new Scanner(System.in);
         int n = konsole.nextInt();
-        konsole.close();
+       
+       
 
         // Kuleleri temsil edecek diziler oluşturuluyor.
-        int[] A = new int[n];
-        int[] B = new int[n];
-        int[] C = new int[n];
-        int[] D = new int[n];
+        int[] source = new int[n];
+        int[] immediate1 = new int[n];
+        int[] immediate2 = new int[n];
+        int[] dest = new int[n];
 
         // Kulelerin içi hazırlanıyor.
         for (int i = n - 1; i > -1; i--) {
-            A[i] = n - i;
+            source[i] = n - i;
         }
-
-        dizi_doldur(B, n);
-        dizi_doldur(C, n);
-        dizi_doldur(D, n);
-
-        yazdir(A, B, C, D);
-
-        dolas(n, A, B, C, D);
        
-        yazdir(A, B, C, D);
+       
+       
+       
+       
+       
+       
+        //diziler ilk değerlerle doldurulur.
+        arrayFill(immediate1);
+        arrayFill(immediate2);
+        arrayFill(dest);
+       
 
-    }
+  
+      allWrite(source, immediate1, immediate2, dest);//ilk değerler ekrana yazdırılır
+      
+       
+       
+        move(n, source, immediate1, immediate2, dest);
+       
+       
+              
+     allWrite(source,immediate1, immediate2, dest);//son değerler ekrana yazırılır
+   
+      
+}
+   
 
-    private static void yazdir(int[] A, int[] B, int[] C, int[] D) {
-        yazdir(A);
-        yazdir(B);
-        yazdir(C);
-        yazdir(D);
-    }
+    private static void allWrite(int[] src, int[] immd1, int[] immd2, int[] dst) {
+        write(src);
+        write(immd1);
+        write(immd2);
+        write(dst);
+    }//topluca  yazdırma.
 
-    public static void kontrol(int[] seri) {
+    public static void control(int[] seri) {
         for (int y = 0; y < (seri.length) - 1; y++) {
             if (seri[y] < seri[y + 1]) {
                 System.err.print("< !! HATALI DİZİ !!>");
             }
         }
-    }
+    }//direklerde ki  dizimi kontrol eder.
 
-    public static void yazdir(int[] dizi) {
+    public static void write(int[] dizi) {
         for (int w = 0; w < dizi.length; w++)
             System.out.print("    " + dizi[w]);
         System.out.print("\n");
-    }
+    }//direklerde ki elemanları yazdirir.
 
-    public static void dizi_doldur(int[] a, int s) {
-        int i;
-        for (i = 0; i < s; i++) {
-            a[i] = 0;
+    public static void arrayFill(int[] a) {
+          for (int i = 0; i < a.length; i++)
+        {
+           a[i] = 0;
         }
-    }
+    }//dizilerde ilk değer ataması yapar.
 
-    public static void tasi(int[] A, int[] B) {
+    public static void assign(int[] src, int[] dst) {
         int a, b;
-        a = uzunlukBul(A);
-        b = uzunlukBul(B);
+        a = lengthFind(src);
+        b = lengthFind(dst);
 
         if (b == 0) {
-            System.out.println("\n" + A[a - 1] + "degeri" + (B[b]) + " üzeine tasindi");
+      System.out.println("\n" + src[a - 1] + "degeri" + (dst[b]) + " üzeine tasindi");
         } else {
-            System.out.println("\n" + A[a - 1] + "degeri" + (B[b - 1]) + " üzeine tasindi");
+       System.out.println("\n" + src[a - 1] + "degeri" + (dst[b - 1]) + " üzeine tasindi");
         }
 
-        B[b] = A[a - 1];
-        A[a - 1] = 0;
-        kontrol(A);
-        kontrol(B);
-    }
+        dst[b] = src[a - 1];//değeri taşıdık.
+        src[a - 1] = 0;//taşınan yere  0 değeri atadık.
+        control(src);
+        control(dst);
+    }//diski tasir.
 
-    
+   
 
-    public static int uzunlukBul(int[] a) {
+    public static int lengthFind(int[] a) {
         int s, t, boy = 0;
         s = a.length;
         for (t = 0; t < s; t++) {
@@ -90,37 +107,26 @@ public class MultiPeg {
                 boy++;
         }
         return s - boy;
-    }
+    }//direkteki disk sayısını döndürür.
 
 
-    
 
-    public static void dolas(int n, int[] A, int[] B, int[] C, int[] D) {
+    public static void move(int n, int[] src, int[] immd1, int[] immd2, int[] dst) {
         if (n == 1)
-            tasi(A, D);
+            assign(src, dst);
         else if (n == 2) {
-            tasi(A, B);
-            tasi(A, D);
-            tasi(B, D);
+            assign(src, immd1);
+            assign(src, dst);
+            assign(immd1, dst);
 
         } else {
-            dolas(n - 2, A, C, D, B);
-            tasi(A, C);
-            tasi(A, D);
-            tasi(C, D);
+            move(n - 2, src, immd2, dst, immd1);
+            assign(src, immd2);
+            assign(src, dst);
+            assign(immd2, dst);
 
-            dolas(n - 2, B, A, C, D);
+            move(n - 2, immd1, src, immd2, dst);
         }
-    }
-
-    public static int uzunluk(int[] a) {
-        int s, t, boy = 0;
-        s = a.length;
-        for (t = 0; t < s; t++) {
-            if (a[t] == 0)
-                boy++;
-        }
-        return s - boy;
-    }
-    //validation   
+    }//direklerde dolaşım sağlar.
 }
+
