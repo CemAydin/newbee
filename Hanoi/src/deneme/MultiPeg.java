@@ -1,4 +1,4 @@
-package edu.gakalsiya.hanoi;
+package edu.gakaksiya.hanoi;
 
 import java.util.Scanner;
 
