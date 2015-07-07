@@ -55,9 +55,9 @@ public class TowerSystem {
 
 	public static void main(String[] args) {
 		System.out.println("Kule büyüklügünü giriniz.");
-		Scanner k = new Scanner(System.in);
-		int n = k.nextInt();
-		k.close();
+		Scanner console = new Scanner(System.in);
+		int n = console.nextInt();
+		console.close();
 
 		TowerSystem firstSystem = new TowerSystem(n);
 		firstSystem.writeAll();
