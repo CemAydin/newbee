@@ -29,6 +29,7 @@ public class Sistem {
 		n = klavye.nextInt();
 		System.out.print("ikinci matrisin sütun sayisini  giriniz : ");
 		t = klavye.nextInt();
+		klavye.close();
 		matrisB = new Matris(n, t);
 	}//matrisA ve matrisB adında iki matris oluşturduk.
 
