@@ -9,23 +9,26 @@ public class TreePeg {
     private static int[] dest;
 
     public static void main(String[] args) {
-        // disk sayısını belirler.
+        
+    	// disk sayısını belirler.
         System.out.println("Kule büyüklügünü giriniz.");
-        Scanner k = new Scanner(System.in);
-        int n = k.nextInt();
+        Scanner console = new Scanner(System.in);
+        int diskCount = console.nextInt();
+        console.close();
+        
         //direkleri temsil eden direkleri oluşturur.
-        src = new int[n];
-        crry = new int[n];
-        dest = new int[n];
+        src = new int[diskCount];
+        crry = new int[diskCount];
+        dest = new int[diskCount];
         //direkler ilklenir.
-        for (int i = n - 1; i > -1; i--) {
-            src[i] = n - i;
+        for (int i = diskCount - 1; i > -1; i--) {
+            src[i] = diskCount - i;
             crry[i] = 0;
             dest[i] = 0;
         }
 
         allWrite();//ilk değerler yazdırılır.
-        move(src, crry, dest, n);
+        move(src, crry, dest, diskCount);
     }
 
     private static void allWrite() {
@@ -91,4 +94,3 @@ public class TreePeg {
         return s - boy;
     }
 }//DİREKTEKİ DİSK SAYISINI BULUR
-
