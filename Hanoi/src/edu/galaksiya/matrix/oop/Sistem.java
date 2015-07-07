@@ -1,4 +1,4 @@
-package edu.galaksiya.nesnelimatrix;
+package edu.galaksiya.matrix.oop;
 
 import java.util.Scanner;
 

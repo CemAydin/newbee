@@ -1,4 +1,4 @@
-package edu.galaksiya.hanoi;
+package edu.galaksiya.hanoi.oop;
 
 public class Tower {
 

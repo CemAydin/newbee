@@ -1,17 +1,19 @@
-package edu.galaksiya.matrix;
+package edu.galaksiya.matrix.func;
 
 import java.util.Scanner;
 
 public class Matrix {
 
 	public static void main(String[] args) {
-		System.out.print("birinci matrisin satır sayisini  giriniz : ");
-
+		
 		Scanner klavye = new Scanner(System.in);
+
+		System.out.print("birinci matrisin satır sayisini  giriniz : ");
 		int n = klavye.nextInt();
 
 		System.out.print("birinci matrisin sütun sayisini  giriniz : ");
 
+		
 		int t = klavye.nextInt();
 
 		int birMatis[][] = new int[n][t];
@@ -26,10 +28,12 @@ public class Matrix {
 		System.out.print("ikinci matrisin satır sayisini  giriniz : ");
 
 		n = klavye.nextInt();
-
 		System.out.print("ikinci matrisin sütun sayisini  giriniz : ");
 
 		t = klavye.nextInt();
+		klavye.close();
+		
+		//		
 		int ikiMatris[][] = new int[n][t];
 		for (int i = 0; i < n; i++) {
 			for (int j = 0; j < t; j++) {
@@ -39,7 +43,7 @@ public class Matrix {
 			}
 			System.out.print("\n");
 		}
-
+		
 		carpma(birMatis, ikiMatris);
 
 	}
