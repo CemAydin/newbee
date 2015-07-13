@@ -2,44 +2,44 @@ package edu.galaksiya.matrix.dist;
 
 import java.util.Scanner;
 
-public class MatrixSystem {
+public class MatrixProcess {
 	// Before multiply
-	public Matrix1 matrixA;
-	public Matrix1 matrixB;
+	public Matrix matrixA;
+	public Matrix matrixB;
 
 	// Divided parts
-	public Matrix1 divA11;
-	public Matrix1 divA12;
-	public Matrix1 divA21;
-	public Matrix1 divA22;
-	public Matrix1 divB11;
-	public Matrix1 divB12;
-	public Matrix1 divB21;
-	public Matrix1 divB22;
-	public Matrix1 carpim1;
-	public Matrix1 carpim2;
-	public Matrix1 carpim3;
-	public Matrix1 carpim4;
-	public Matrix1 carpim5;
-	public Matrix1 carpim6;
-	public Matrix1 carpim7;
-	public Matrix1 carpim8;
+	public Matrix divA11;
+	public Matrix divA12;
+	public Matrix divA21;
+	public Matrix divA22;
+	public Matrix divB11;
+	public Matrix divB12;
+	public Matrix divB21;
+	public Matrix divB22;
+	public Matrix product1;
+	public Matrix product2;
+	public Matrix product3;
+	public Matrix product4;
+	public Matrix product5;
+	public Matrix product6;
+	public Matrix product7;
+	public Matrix product8;
 
-	public MatrixSystem() {// consructor
+	public MatrixProcess() {// consructor
 
-		Scanner klavye = new Scanner(System.in);
+		Scanner console = new Scanner(System.in);
 
 		System.out.print("first matrix count of rows : ");
-		int n = klavye.nextInt();
+		int n = console.nextInt();
 		System.out.print("first matrix count of column : ");
-		int t = klavye.nextInt();
-		matrixA = new Matrix1(n, t, "matrixA");
+		int t = console.nextInt();
+		matrixA = new Matrix(n, t, "matrixA");
 		System.out.print("second matrix count of rows : ");
-		n = klavye.nextInt();
+		n = console.nextInt();
 		System.out.print("second matrix count of column : ");
-		t = klavye.nextInt();
-		klavye.close();
-		matrixB = new Matrix1(n, t, "matrixB");
+		t = console.nextInt();
+		console.close();
+		matrixB = new Matrix(n, t, "matrixB");
 
 	}// Create matrixA and matrixB(matris a ve b yi oluşturduk)
 
@@ -52,25 +52,25 @@ public class MatrixSystem {
 		int n = (int) Math.ceil(matrixA.getlong() / 2);
 		if (character == 'A') {
 
-			divA11 = new Matrix1(n, k, "divA11");
+			divA11 = new Matrix(n, k, "divA11");
 			for (int i = 0; i < n; i++) {
 				for (int j = 0; j < k; j++) {
 					divA11.matrix[i][j] = matrixA.matrix[i][j];
 				}
 			}
-			divA12 = new Matrix1(n, matrixA.getwidth() - k, "divA12");
+			divA12 = new Matrix(n, matrixA.getwidth() - k, "divA12");
 			for (int i = 0; i < n; i++) {
 				for (int j = 0; j < matrixA.getwidth() - k; j++) {
 					divA12.matrix[i][j] = matrixA.matrix[i][j + k];
 				}
 			}
-			divA21 = new Matrix1(matrixA.getlong() - n, k, "divA21");
+			divA21 = new Matrix(matrixA.getlong() - n, k, "divA21");
 			for (int i = 0; i < matrixA.getlong() - n; i++) {
 				for (int j = 0; j < k; j++) {
 					divA21.matrix[i][j] = matrixA.matrix[i + n][j];
 				}
 			}
-			divA22 = new Matrix1(matrixA.getlong() - n, matrixA.getwidth() - k,
+			divA22 = new Matrix(matrixA.getlong() - n, matrixA.getwidth() - k,
 					"divA22");
 			for (int i = 0; i < matrixA.getlong() - n; i++) {
 				for (int j = 0; j < matrixA.getwidth() - k; j++) {
@@ -81,25 +81,25 @@ public class MatrixSystem {
 		int t = (int) Math.ceil(matrixB.getwidth() / 2);
 
 		if (character == 'B') {
-			divB11 = new Matrix1(k, t, "divB11");
+			divB11 = new Matrix(k, t, "divB11");
 			for (int i = 0; i < k; i++) {
 				for (int j = 0; j < t; j++) {
 					divB11.matrix[i][j] = matrixB.matrix[i][j];
 				}
 			}
-			divB12 = new Matrix1(k, matrixB.getwidth() - t, "divB12");
+			divB12 = new Matrix(k, matrixB.getwidth() - t, "divB12");
 			for (int i = 0; i < k; i++) {
 				for (int j = 0; j < matrixB.getwidth() - t; j++) {
 					divB12.matrix[i][j] = matrixB.matrix[i][j + t];
 				}
 			}
-			divB21 = new Matrix1(matrixB.getlong() - k, t, "divB21");
+			divB21 = new Matrix(matrixB.getlong() - k, t, "divB21");
 			for (int i = 0; i < matrixB.getlong() - k; i++) {
 				for (int j = 0; j < t; j++) {
 					divB21.matrix[i][j] = matrixB.matrix[i + k][j];
 				}
 			}
-			divB22 = new Matrix1(matrixB.getlong() - k, matrixB.getwidth() - t,
+			divB22 = new Matrix(matrixB.getlong() - k, matrixB.getwidth() - t,
 					"divB22");
 			for (int i = 0; i < matrixB.getlong() - k; i++) {
 				for (int j = 0; j < matrixB.getwidth() - t; j++) {
@@ -111,19 +111,19 @@ public class MatrixSystem {
 
 	}
 
-	public void ilkle(Matrix1 tempmatrix) {// initializing
+	public void initial(Matrix tempMatrix) {// initializing
 
-		for (int i = 0; i < tempmatrix.getlong(); i++) {
-			for (int j = 0; j < tempmatrix.getwidth(); j++) {
-				tempmatrix.matrix[i][j] = (i + 1) * (j + 1);
+		for (int i = 0; i < tempMatrix.getlong(); i++) {
+			for (int j = 0; j < tempMatrix.getwidth(); j++) {
+				tempMatrix.matrix[i][j] = (i + 1) * (j + 1);
 			}
 		}
 	}// Matrislerin ilk değerleri atandı.
 
-	synchronized public void multiply(Matrix1 matrix1, Matrix1 matrix2) {// to
-																			// multiply
-																			// two
-																			// matrix
+	synchronized public void multiply(Matrix matrix1, Matrix matrix2) {// to
+																		// multiply
+																		// two
+																		// matrix
 
 		int new1[][] = new int[matrix1.getlong()][matrix2.getwidth()];
 		for (int i = 0; i < matrix1.getlong(); i++) {
@@ -140,50 +140,50 @@ public class MatrixSystem {
 			}
 		}
 		if (matrix1.name == "divA11" && matrix2.name == "divB11") {
-			carpim1 = new Matrix1(new1.length, new1[0].length, "carpim1");
-			carpim1.matrix = new1;
+			product1 = new Matrix(new1.length, new1[0].length, "carpim1");
+			product1.matrix = new1;
 		} else if (matrix1.name == "divA12" && matrix2.name == "divB21") {
-			carpim2 = new Matrix1(new1.length, new1[0].length, "carpim2");
-			carpim2.matrix = new1;
+			product2 = new Matrix(new1.length, new1[0].length, "carpim2");
+			product2.matrix = new1;
 		} else if (matrix1.name == "divA11" && matrix2.name == "divB12") {
-			carpim3 = new Matrix1(new1.length, new1[0].length, "carpim2");
-			carpim3.matrix = new1;
+			product3 = new Matrix(new1.length, new1[0].length, "carpim2");
+			product3.matrix = new1;
 		} else if (matrix1.name == "divA12" && matrix2.name == "divB22") {
-			carpim4 = new Matrix1(new1.length, new1[0].length, "carpim2");
-			carpim4.matrix = new1;
+			product4 = new Matrix(new1.length, new1[0].length, "carpim2");
+			product4.matrix = new1;
 		} else if (matrix1.name == "divA21" && matrix2.name == "divB11") {
-			carpim5 = new Matrix1(new1.length, new1[0].length, "carpim2");
-			carpim5.matrix = new1;
+			product5 = new Matrix(new1.length, new1[0].length, "carpim2");
+			product5.matrix = new1;
 		} else if (matrix1.name == "divA22" && matrix2.name == "divB21") {
-			carpim6 = new Matrix1(new1.length, new1[0].length, "carpim2");
-			carpim6.matrix = new1;
+			product6 = new Matrix(new1.length, new1[0].length, "carpim2");
+			product6.matrix = new1;
 		} else if (matrix1.name == "divA21" && matrix2.name == "divB12") {
-			carpim7 = new Matrix1(new1.length, new1[0].length, "carpim2");
-			carpim7.matrix = new1;
+			product7 = new Matrix(new1.length, new1[0].length, "carpim2");
+			product7.matrix = new1;
 		} else if (matrix1.name == "divA22" && matrix2.name == "divB22") {
-			carpim8 = new Matrix1(new1.length, new1[0].length, "carpim2");
-			carpim8.matrix = new1;
+			product8 = new Matrix(new1.length, new1[0].length, "carpim2");
+			product8.matrix = new1;
 		}
 		write(new1);// Verilen iki matrisi çarptık.
 	}
 
-	public int[][] adder(Matrix1 top1, Matrix1 top2) {// add
-		int t = top1.getlong();
-		int y = top2.getwidth();
-		int yeni[][] = new int[t][y];
+	public int[][] adder(Matrix temp1, Matrix temp2) {// add
+		int t = temp1.getlong();
+		int y = temp2.getwidth();
+		int newMatrix[][] = new int[t][y];
 		for (int i = 0; i < t; i++) {
 			for (int j = 0; j < y; j++) {
-				yeni[i][j] = top1.matrix[i][j] + top2.matrix[i][j];
+				newMatrix[i][j] = temp1.matrix[i][j] + temp2.matrix[i][j];
 			}
 		}
-		return yeni;
+		return newMatrix;
 	}// İki matris toplandı.
 
-	public void write(int[][] yazi) {// Matrisi ekrana yazırmak için.// it's
+	public void write(int[][] value) {// Matrisi ekrana yazırmak için.// it's
 										// just for wiriting.
-		for (int i = 0; i < yazi.length; i++) {
-			for (int j = 0; j < yazi[0].length; j++) {
-				System.out.print("    " + yazi[i][j] + " ");
+		for (int i = 0; i < value.length; i++) {
+			for (int j = 0; j < value[0].length; j++) {
+				System.out.print("    " + value[i][j] + " ");
 			}
 			System.out.print("\n");
 		}
@@ -194,10 +194,10 @@ public class MatrixSystem {
 										// topladık.//İt
 		// makes big matrix with small matrix
 
-		int temp1[][] = adder(carpim1, carpim2);
-		int temp2[][] = adder(carpim3, carpim4);
-		int temp3[][] = adder(carpim5, carpim6);
-		int temp4[][] = adder(carpim7, carpim8);
+		int temp1[][] = adder(product1, product2);
+		int temp2[][] = adder(product3, product4);
+		int temp3[][] = adder(product5, product6);
+		int temp4[][] = adder(product7, product8);
 		int general[][] = new int[temp1.length + temp3.length][temp1[0].length
 				+ temp2[0].length];
 		for (int i = 0; i < temp1.length; i++) {
