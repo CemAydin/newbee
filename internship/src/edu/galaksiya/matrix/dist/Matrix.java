@@ -18,7 +18,29 @@ public class Matrix {
 	}
 
 	public int getwidth() {// matrisin genişliğini döndürür.//it takes matrix
-							// width
-		return widther;
+		return widther; // width
 	}
+
+	public String serialize() {
+		String giden = String.valueOf(matrix.length)
+				+ String.valueOf(matrix[0].length)
+				+ String.valueOf(matrix.length)
+				+ String.valueOf(matrix[0].length);
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[0].length; j++) {
+				giden = giden + String.valueOf(matrix[i][j]);
+			}
+
+		}
+		for (int i = 0; i < matrix.length; i++) {
+			for (int j = 0; j < matrix[0].length; j++) {
+				giden = giden + String.valueOf(matrix[i][j]);
+			}
+		}
+		giden = giden + 'e';
+		return giden;
+	}		
+	// TODO: Math.random kullanarak matrix yarat
+	// TODO: Deserialize metodunu yaz.
+	
 }
