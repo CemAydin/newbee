@@ -5,6 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -18,9 +19,11 @@ public class Leader implements Runnable {
 	static final String SERVER_IP = "192.168.2.248";
 
 	private ServerSocket serverSocket;
-	private List<IWorker> workers = new ArrayList<IWorker>();
+	public  List<IWorker> workers = new ArrayList<IWorker>();
 	private boolean active = true;
-
+    
+	
+	Scanner console=new Scanner(System.in);
 	public Leader() throws IOException {
 		logger.setLevel(Level.FINEST);
 		// Getting started to work;
@@ -48,10 +51,10 @@ public class Leader implements Runnable {
 			IWorker workerRef = new IWorker(socket, new Wellcomer());
 			this.workers.add(workerRef);
 			logger.info("a worker arrived");
-
 			Thread wrThread = new Thread(workerRef);
 			wrThread.start();
 			workerRef.sendMessage("Başla");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -59,7 +62,9 @@ public class Leader implements Runnable {
 
 	@Override
 	public void run() {
-		while (active) {
+		System.out.println("yeni arkadaş eklemek için harhangi bir karakter girin");
+		String temp=console.nextLine();
+		while (active && temp!=null) {
 			work();
 		}
 	}

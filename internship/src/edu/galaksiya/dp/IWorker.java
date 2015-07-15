@@ -1,21 +1,27 @@
 package edu.galaksiya.dp;
-
+import java.util.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.logging.Logger;
 
 public class IWorker implements Runnable {
 
 	Logger logger = Logger.getLogger(IWorker.class.getName());
+	
 	protected Action action;
 	protected Socket clientSocket;
 	protected PrintWriter out;
 	protected BufferedReader in;
 	private boolean activate = true;
+	public String temp1;
+	public Scanner console=new Scanner(System.in);
 
 	/**
 	 * Connects to the Leader which is defined by {@link Leader#SERVER_IP} and
@@ -52,6 +58,7 @@ public class IWorker implements Runnable {
 	}
 
 	@Override
+	
 	public void run() {
 		logger.info("Waiting messages");
 		while (activate) {
@@ -70,18 +77,28 @@ public class IWorker implements Runnable {
 			logger.info("A message arrived:" + deger);
 			String message = act(deger);
 			if (message != null)
+				
+				
 				this.sendMessage(message);
 		}
 	}
 
 	public void sendMessage(String message) {
 		logger.info("Sending message:" + message);
+		
+			
+		
+		
 		this.out.println(message);
+	
+		
+				
 	}
 
 	private String act(String deger) throws IOException {
 		return this.action.act(deger);
 	}
+	
 
 	/**
 	 * Closes all open socket, input and output streams.
