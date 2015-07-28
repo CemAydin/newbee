@@ -10,13 +10,13 @@ public class TreePeg {
 
     public static void main(String[] args) {
         
-    	// disk sayısını belirler.
+    	// disk sayısını belirler.count of disk
         System.out.println("Kule büyüklügünü giriniz.");
         Scanner console = new Scanner(System.in);
         int diskCount = console.nextInt();
         console.close();
         
-        //direkleri temsil eden direkleri oluşturur.
+        //direkleri temsil eden direkleri oluşturur. Count of peg
         src = new int[diskCount];
         crry = new int[diskCount];
         dest = new int[diskCount];
@@ -27,17 +27,17 @@ public class TreePeg {
             dest[i] = 0;
         }
 
-        allWrite();//ilk değerler yazdırılır.
+        allWrite();//ilk değerler yazdırılır.All peg elements writing
         move(src, crry, dest, diskCount);
     }
 
-    private static void allWrite() {
+    private static void allWrite() {//All peg elements writing
         write(src, "src");
         write(crry, "carry");
         write(dest, "dest");
     }//TOPLU YAZIRMA İŞLEMİ
 
-    public static void write(int[] dizi, String kule) {
+    public static void write(int[] dizi, String kule) {//A peg elements writing
         System.out.print(kule + ":\t");
         for (int w = 0; w < dizi.length; w++)
             System.out.print(" " + dizi[w]);
@@ -50,7 +50,7 @@ public class TreePeg {
      * @param A
      * @param B
      */
-    public static void assign(int[] A, int[] B) {
+    public static void assign(int[] A, int[] B) {//move a disc
          
         int a = lengthFill(A);
         int b = lengthFill(B);
@@ -66,7 +66,7 @@ public class TreePeg {
         control(B);
     }//BİR DİSKİ TAŞIR
 
-    public static void move(int[] source, int[] carry, int[] destionation, int n) {
+    public static void move(int[] source, int[] carry, int[] destionation, int n) {//move between pegs
         if (n == 1) {
             assign(source, destionation);
         } else {
@@ -76,7 +76,7 @@ public class TreePeg {
         }
     }//DİREKLER ARASINDA DOLAŞIM SAĞLAR
 
-    public static void control(int[] seri) {
+    public static void control(int[] seri) {// control in peg
         for (int y = 0; y < (seri.length) - 1; y++) {
             if (seri[y] < seri[y + 1]) {
                 System.out.print("\n   dizilerde yanlış dizim var");

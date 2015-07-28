@@ -47,11 +47,11 @@ public class TowerSystem {
 			System.out.println(c + "	value	" + "transporting  on the " + dest.name);
 			move(carry, src, dest, n - 1);
 		}
-	}// method to choose which peg
+	}// method to choose which peg.
 
 	private void play() {
 		this.move(towerA, towerB, towerC, diskCount);
-	}// game starting
+	}// game starting.
 
 	public static void main(String[] args) {
 		System.out.println("Kule büyüklügünü giriniz.");
@@ -60,8 +60,8 @@ public class TowerSystem {
 		console.close();
 
 		TowerSystem firstSystem = new TowerSystem(n);
-		firstSystem.writeAll();
-		firstSystem.play();
+		firstSystem.writeAll();//All peg writing.
+		firstSystem.play();//The game is starting.
 		firstSystem.writeAll();
 	}
 }

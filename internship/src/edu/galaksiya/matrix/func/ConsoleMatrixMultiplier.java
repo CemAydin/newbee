@@ -2,7 +2,7 @@ package edu.galaksiya.matrix.func;
 
 import java.util.Scanner;
 
-public class Matrix {
+public class ConsoleMatrixMultiplier {
 
 	public static void main(String[] args) {
 
@@ -42,7 +42,7 @@ public class Matrix {
 
 	}
 
-	public static void multiply(int[][] matrix1, int[][] matrix2) {
+	public static void multiply(int[][] matrix1, int[][] matrix2) {//It's to multiply 
 		int long1 = matrix1.length;
 		int long2 = matrix2[0].length;
 		int long3 = matrix1[0].length;

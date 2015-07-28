@@ -1,16 +1,15 @@
 package edu.galaksiya.matrix.dist;
 
-import java.net.ServerSocket;
-import java.net.Socket;
+import edu.galaksiya.matrix.dist.MatrixProcess;
+import edu.galaksiya.matrix.oop.*;
 
 public class OperatorThread extends Thread {
 	MatrixProcess newMatrix;
 	Matrix MatrixA;
 	Matrix MatrixB;
 
-	public OperatorThread(MatrixProcess input, Matrix valueA, Matrix valueB,
-			ServerSocket server) {
-		Socket clientSocket = null;
+	public OperatorThread(MatrixProcess input, Matrix valueA, Matrix valueB) {
+
 		newMatrix = input;
 		MatrixA = valueA;
 		MatrixB = valueB;

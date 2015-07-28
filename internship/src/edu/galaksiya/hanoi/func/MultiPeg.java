@@ -7,18 +7,18 @@ public class MultiPeg {
 	public static void main(String[] args) {
 
 		// Disk sayısını belirler.
-		System.out.println("Kule büyüklügünü giriniz.");
+		System.out.println("Kule büyüklügünü giriniz.");// count of disc
 		Scanner konsole = new Scanner(System.in);
 		int n = konsole.nextInt();
 		konsole.close();
 
-		// Kuleleri temsil edecek diziler oluşturuluyor.
+		// Kuleleri temsil edecek diziler oluşturuluyor.//it represent peg
 		int[] source = new int[n];
 		int[] immediate1 = new int[n];
 		int[] immediate2 = new int[n];
 		int[] dest = new int[n];
 
-		// Kulelerin içi hazırlanıyor.
+		// Kulelerin içi hazırlanıyor.initializing
 		for (int i = n - 1; i > -1; i--) {
 			source[i] = n - i;
 		}
@@ -41,9 +41,9 @@ public class MultiPeg {
 		write(immd1);
 		write(immd2);
 		write(dst);
-	}// topluca yazdırma.
+	}// topluca yazdırma.All pegs elements write
 
-	public static void control(int[] seri) {
+	public static void control(int[] seri) {// control in a peg
 		for (int y = 0; y < (seri.length) - 1; y++) {
 			if (seri[y] < seri[y + 1]) {
 				System.err.print("< !! HATALI DİZİ !!>");
@@ -63,7 +63,7 @@ public class MultiPeg {
 		}
 	}// dizilerde ilk değer ataması yapar.
 
-	public static void assign(int[] src, int[] dst) {
+	public static void assign(int[] src, int[] dst) {// a disc move
 		int a, b;
 		a = lengthFind(src);
 		b = lengthFind(dst);
@@ -92,8 +92,7 @@ public class MultiPeg {
 		return s - boy;
 	}// direkteki disk sayısını döndürür.
 
-	public static void move(int n, int[] src, int[] immd1, int[] immd2,
-			int[] dst) {
+	public static void move(int n, int[] src, int[] immd1, int[] immd2,int[] dst) {//move between pegs
 		if (n == 1)
 			assign(src, dst);
 		else if (n == 2) {
