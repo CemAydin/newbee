@@ -1,6 +1,8 @@
-package edu.galaksiya.distributer;
+package edu.galaksiya;
 
 import java.io.IOException;
+
+import edu.galaksiya.distributer.IWorker;
 
 public class WorkerStarter {
 

@@ -1,8 +1,10 @@
-package edu.galaksiya.distributer;
+package edu.galaksiya;
 
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import edu.galaksiya.distributer.Leader;
 
 public class LeaderStarter {
 

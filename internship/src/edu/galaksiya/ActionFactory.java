@@ -1,8 +1,13 @@
-package edu.galaksiya.matrix.multiply.distributed;
+package edu.galaksiya;
 
 import edu.galaksiya.distributer.Action;
 import edu.galaksiya.distributer.Message;
+import edu.galaksiya.matrix.multiply.distributed.AddGiver;
+import edu.galaksiya.matrix.multiply.distributed.Adder;
+import edu.galaksiya.matrix.multiply.distributed.Visiting;
+import edu.galaksiya.matrix.multiply.distributed.Wellcomer;
 
+//TODO: Paket hiyerarşisi dikkate alınarak bölünecek...
 public class ActionFactory {
 
 	public static Action creator(Message message) {

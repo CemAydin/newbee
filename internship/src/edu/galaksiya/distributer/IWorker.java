@@ -7,7 +7,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.logging.Logger;
 
-import edu.galaksiya.matrix.multiply.distributed.ActionFactory;
+import edu.galaksiya.ActionFactory;
 
 public class IWorker implements Runnable {
 
