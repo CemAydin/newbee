@@ -1,4 +1,4 @@
-package edu.galaksiya.matrix.func;
+package edu.galaksiya.matrix.multiply.func;
 
 import java.util.Scanner;
 

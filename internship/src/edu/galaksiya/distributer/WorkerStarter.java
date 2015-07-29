@@ -1,13 +1,11 @@
-package edu.galaksiya.dp.test;
+package edu.galaksiya.distributer;
 
 import java.io.IOException;
-
-import edu.galaksiya.dp.IWorker;
 
 public class WorkerStarter {
 
 	public static void main(String[] args) throws IOException {
-		IWorker worker = new IWorker(new Visiting());
+		IWorker worker = new IWorker();
 		Thread wThread = new Thread(worker);
 		wThread.start();
 	}

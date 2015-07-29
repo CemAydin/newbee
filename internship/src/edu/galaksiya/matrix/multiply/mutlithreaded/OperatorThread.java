@@ -1,8 +1,8 @@
-package edu.galaksiya.matrix.dist;
+package edu.galaksiya.matrix.multiply.mutlithreaded;
 
-import edu.galaksiya.matrix.dist.MatrixProcess;
-import edu.galaksiya.matrix.oop.*;
-
+import edu.galaksiya.matrix.Matrix;
+import edu.galaksiya.matrix.multiply.MatrixProcess;
+//TODO: Rename
 public class OperatorThread extends Thread {
 	MatrixProcess newMatrix;
 	Matrix MatrixA;

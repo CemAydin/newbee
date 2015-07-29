@@ -1,4 +1,4 @@
-package edu.galaksiya.matrix.oop;
+package edu.galaksiya.matrix;
 
 public class Matrix {
 

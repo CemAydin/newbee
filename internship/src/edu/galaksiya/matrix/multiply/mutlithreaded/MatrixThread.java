@@ -1,5 +1,8 @@
-package edu.galaksiya.matrix.dist;
+package edu.galaksiya.matrix.multiply.mutlithreaded;
 
+import edu.galaksiya.matrix.multiply.MatrixProcess;
+
+//TODO: Rename
 public class MatrixThread {
 
 	public static void main(String args[]) {

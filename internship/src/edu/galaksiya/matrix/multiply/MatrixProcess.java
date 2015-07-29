@@ -1,7 +1,8 @@
-package edu.galaksiya.matrix.dist;
+package edu.galaksiya.matrix.multiply;
 
 import java.util.Scanner;
-import edu.galaksiya.matrix.oop.Matrix;
+
+import edu.galaksiya.matrix.Matrix;
 
 ;
 
@@ -9,7 +10,7 @@ public class MatrixProcess {
 	// Before multiply
 	public Matrix matrixA;
 	public Matrix matrixB;
-
+	
 	// Divided parts
 	public Matrix divA11;
 	public Matrix divA12;
