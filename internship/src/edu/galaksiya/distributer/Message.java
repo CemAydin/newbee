@@ -29,7 +29,10 @@ public class Message implements Serializable {
 
 	public String getMessage() {
 		return this.message;
-
 	}
 
+	@Override
+	public String toString() {
+		return "Message [act=" + act + ", message=" + message + "]";
+	}
 }

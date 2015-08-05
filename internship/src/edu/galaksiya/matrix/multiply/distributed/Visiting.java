@@ -3,21 +3,25 @@ package edu.galaksiya.matrix.multiply.distributed;
 import java.util.Scanner;
 
 import edu.galaksiya.distributer.Action;
+import edu.galaksiya.distributer.IWorker;
 import edu.galaksiya.distributer.Message;
 
-public class Visiting implements Action {
+public class Visiting extends Action {
+
 	private Scanner console = new Scanner(System.in);
-	private String temp1;
+
+	public Visiting(IWorker iWorker) {
+		super(iWorker);
+	}
 
 	@Override
 	public Message act(Message message) {
-
 		System.out.print("Ben Cem Aydın mesajınızı yazın ");
-		temp1 = console.nextLine();
-		temp1="Cem Aydın	----->	"+temp1;
-		message.setMessage(temp1);
-		message.setAct("Visiting");
-		System.out.println(temp1);
+		String strMessage = console.nextLine();
+		strMessage="Cem Aydın	----->	"+strMessage;
+		message.setMessage(strMessage);
+		message.setAct("Welcommer");
+		System.out.println(strMessage);
 		return message ;
 	}
 }

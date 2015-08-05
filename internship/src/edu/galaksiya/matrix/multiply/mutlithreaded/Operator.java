@@ -2,13 +2,13 @@ package edu.galaksiya.matrix.multiply.mutlithreaded;
 
 import edu.galaksiya.matrix.Matrix;
 import edu.galaksiya.matrix.multiply.MatrixProcess;
-//TODO: Rename
-public class OperatorThread extends Thread {
+
+public class Operator extends Thread {
 	MatrixProcess newMatrix;
 	Matrix MatrixA;
 	Matrix MatrixB;
 
-	public OperatorThread(MatrixProcess input, Matrix valueA, Matrix valueB) {
+	public Operator(MatrixProcess input, Matrix valueA, Matrix valueB) {
 
 		newMatrix = input;
 		MatrixA = valueA;

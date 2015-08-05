@@ -1,23 +1,27 @@
 package edu.galaksiya.matrix.multiply.distributed;
 
 import edu.galaksiya.distributer.Action;
+import edu.galaksiya.distributer.IWorker;
 import edu.galaksiya.distributer.Message;
 
-public class Adder implements Action {
+public class Adder extends Action {
 
 	private int valueA;
 	private int valueB;
 
-	@Override
-	public Message act(Message message) {
-		valueA = Integer.parseInt(message.getMessage().substring(0, 1));
-		valueB = Integer.parseInt(message.getMessage().substring(1, 2));
+	public Adder(IWorker iWorker) {
+		super(iWorker);
+	}
 
-		System.out.println(valueB);
+
+	@Override
+	public synchronized Message act(Message message) {
+		valueA = Integer.parseInt(message.getMessage());
+		valueB = Integer.parseInt(message.getMessage());
 		int temp = valueA + valueB;
 		System.out.println(temp);
 		message.setMessage(String.valueOf(temp));
-		message.setAct("Adder");
+		message.setAct("AddGiver");
 		return message;
 	}
 }

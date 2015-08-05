@@ -12,6 +12,7 @@ public class LeaderStarter {
 		Logger.getGlobal().setLevel(Level.FINEST);
 		Leader leader = new Leader();
 		Thread lThread = new Thread(leader);
+		System.out.println(Thread.currentThread().getName());
 		lThread.start();
 	}
 }
