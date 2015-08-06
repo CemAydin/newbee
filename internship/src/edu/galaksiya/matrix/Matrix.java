@@ -15,7 +15,7 @@ public class Matrix {
 		widther = column;
 		this.setName(name);
 	}
-	
+
 	public Matrix(int[][] matrix, String name) {
 		super();
 		this.matrix = matrix;
@@ -23,8 +23,6 @@ public class Matrix {
 		this.longer = matrix.length;
 		this.widther = matrix[0].length;
 	}
-
-
 
 	public int getlong() {// Matrisin boyunu döndürür.//it takes matrix long
 		return longer;
@@ -45,6 +43,7 @@ public class Matrix {
 
 	public void write() {// Matrisi ekrana yazırmak için.// it's
 		// just for wiriting.
+		System.out.println(this.name);
 		for (int i = 0; i < this.getMatrix().length; i++) {
 			for (int j = 0; j < this.getMatrix()[0].length; j++) {
 				System.out.print("    " + this.getMatrix()[i][j] + " ");
@@ -85,8 +84,10 @@ public class Matrix {
 
 	}
 
-	public static int[][] multiply(Matrix matrix, Matrix matrix2) {// to multiply two
-															// matrix
+	public static int[][] multiply(Matrix matrix, Matrix matrix2) {// to
+																	// multiply
+																	// two
+		// matrix
 		int new1[][] = new int[matrix.getlong()][matrix2.getwidth()];
 		for (int i = 0; i < matrix.getlong(); i++) {
 			for (int j = 0; j < matrix2.getwidth(); j++) {
@@ -97,11 +98,12 @@ public class Matrix {
 		for (int i = 0; i < matrix.getlong(); i++) {
 			for (int j = 0; j < matrix2.getwidth(); j++) {
 				for (int k = 0; k < matrix2.getlong(); k++) {
-					new1[i][j] += matrix.getMatrix()[i][k] * matrix2.getMatrix()[k][j];
+					new1[i][j] += matrix.getMatrix()[i][k]
+							* matrix2.getMatrix()[k][j];
 				}
 			}
 		}
-	
+
 		return new1;
 	}
 
@@ -127,7 +129,5 @@ public class Matrix {
 				+ ", matrix=" + Arrays.toString(matrix) + ", name=" + name
 				+ "]";
 	}
-	
-	
 
 }

@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 
 import edu.galaksiya.ActionFactory;
 import edu.galaksiya.matrix.Matrix;
-import edu.galaksiya.matrix.multiply.distributed.HandleMultiply;
 
 public class IWorker implements Runnable {
 	Logger logger = Logger.getLogger(IWorker.class.getName());
@@ -21,11 +20,8 @@ public class IWorker implements Runnable {
 
 	private boolean activate = true;
 
-	private int operationOk = 0;
-	private boolean finish = false;
-
 	private String name;
-	private String product;
+	private int partsname;
 
 	private ArrayList<WorkerListener> listeners;
 
@@ -52,7 +48,8 @@ public class IWorker implements Runnable {
 			// oluşturduk *//
 	}
 
-	public IWorker(Socket clientSocket) throws IOException {
+	public IWorker(Socket clientSocket, int partsname) throws IOException {
+		this.partsname = partsname;
 		this.clientSocket = clientSocket;
 		out = new ObjectOutputStream(clientSocket.getOutputStream());
 		in = new ObjectInputStream(clientSocket.getInputStream());
@@ -63,18 +60,12 @@ public class IWorker implements Runnable {
 		logger.info(String.format("%s{%s} waiting messages", Thread
 				.currentThread().getName(), getName()));
 		while (activate) {
-			if (operationOk == 0) {
-				try {
-					readMessages();
-					Thread.sleep(50);
-				} catch (IOException | InterruptedException e) {
-					e.printStackTrace();
-				}
-			} else {
-				logger.info(getName() + "	" + Thread.currentThread().getName()
-						+ " den çıkılıyor");
-				break;
 
+			try {
+				readMessages();
+				Thread.sleep(50);
+			} catch (IOException | InterruptedException e) {
+				e.printStackTrace();
 			}
 		}
 	}
@@ -86,13 +77,11 @@ public class IWorker implements Runnable {
 			while ((msgIncoming = (Message) in.readObject()).getMessage() != null) {
 				logger.info(String.format("%s{%s} read %s", Thread
 						.currentThread().getName(), name, msgIncoming));
-				
-				
+
 				Message message = act(msgIncoming);
 				if (message != null)
 					this.sendMessage(message);
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 
@@ -111,10 +100,10 @@ public class IWorker implements Runnable {
 	}
 
 	private Message act(Message message) throws IOException {// Chosee What work
-		Action action = ActionFactory.creator(message,this);
-		logger.info(String.format("%s{%s} selected Action{name:%s} for %s",
-				Thread.currentThread().getName(), getName(), action.getClass(),
-				message));
+		Action action = ActionFactory.creator(message, this);
+		// logger.info(String.format("%s{%s} selected Action{name:%s} for %s",
+		// Thread.currentThread().getName(), getName(), action.getClass(),
+		// message));
 		return action.act(message);
 	}
 
@@ -126,6 +115,7 @@ public class IWorker implements Runnable {
 	 */
 	public void stop() {
 		try {
+			activate = false;
 			out.close();
 			in.close();
 			clientSocket.close();
@@ -141,13 +131,10 @@ public class IWorker implements Runnable {
 	public void notifyListeners(Matrix solution) {
 		// değişim olmuşsa lideri uyar.If there is a change at finish
 		// then notify leader
-		if (finish == true) {
-			for (WorkerListener listener : getListeners()) {
-				logger.info("su an lider uyandırılıyor");
-				int i = Integer.valueOf(Thread.currentThread().getName()
-						.substring(7, 8));
-				listener.finish(solution, i);
-			}
+
+		for (WorkerListener listener : getListeners()) {
+			solution.setName(String.valueOf(partsname));
+			listener.finish(solution);
 		}
 	}
 

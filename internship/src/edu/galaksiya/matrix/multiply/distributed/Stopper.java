@@ -11,8 +11,7 @@ public class Stopper extends Action {
 	}
 
 	@Override
-	public synchronized Message act(Message message) {
-		this.getiWorker().stop();		
+	public synchronized Message act(Message message) {	
 		return null;
 	}
 }

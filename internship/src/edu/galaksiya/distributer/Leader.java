@@ -22,14 +22,13 @@ public class Leader implements WorkerListener, Runnable {
 	Logger logger = Logger.getAnonymousLogger();
 
 	private ServerSocket serverSocket;
-
+	private int countParts = 0;
 	private MatrixProcess matrixProcessor;
 	private List<IWorker> workers = new ArrayList<IWorker>();
 	private List<Matrix> dividies = new ArrayList<Matrix>();
-	private Matrix [] productsList = new Matrix[8];
+	private Matrix[] productsList = new Matrix[8];
 
 	private int counterDivides = 0;
-	private int counterProduct = 0;
 
 	Scanner console = new Scanner(System.in);
 	private int menuChoice;
@@ -53,11 +52,10 @@ public class Leader implements WorkerListener, Runnable {
 	public void addProduct() {
 		int[] order = { 0, 4, 1, 6, 0, 5, 1, 7, 2, 4, 3, 6, 2, 5, 3, 7 };
 
-		int counterIndex = 0;
 		for (int i = 0; i < order.length; i++) {
 			dividies.add(matrixProcessor.divides[order[i]]);
 		}
-		
+
 	}
 
 	/**
@@ -73,7 +71,7 @@ public class Leader implements WorkerListener, Runnable {
 	public void workPart() {
 		try {
 			Socket socket = socketAccepting();
-			IWorker workerRef = initiateWorker(socket);
+			IWorker workerRef = initiateWorker(socket, countParts++);
 
 			if (menuChoice == 1) {
 				firstMessage(workerRef, "basla", "Welcommer");
@@ -85,12 +83,8 @@ public class Leader implements WorkerListener, Runnable {
 				serializedMatrix += dividies.get(counterDivides++).serialize();
 
 				firstMessage(workerRef, serializedMatrix, Multipler.NAME);
-
-				for (Matrix matrix : productsList) {
-					matrix.write();
-					System.out.println(counterProduct++);
-				}
 			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -106,8 +100,8 @@ public class Leader implements WorkerListener, Runnable {
 		workerRef.sendMessage(msgStarter);
 	}
 
-	public IWorker initiateWorker(Socket socket) throws IOException {
-		IWorker workerRef = new IWorker(socket);
+	public IWorker initiateWorker(Socket socket, int parts) throws IOException {
+		IWorker workerRef = new IWorker(socket, parts);
 		workerRef.setName(SERVER);
 		this.workers.add(workerRef);
 		Thread wrThread = new Thread(workerRef);
@@ -122,7 +116,7 @@ public class Leader implements WorkerListener, Runnable {
 			workPart();
 		}
 		try {
-			Thread.sleep(10000);
+			Thread.sleep(1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -132,14 +126,13 @@ public class Leader implements WorkerListener, Runnable {
 			matrix.write();
 		}
 		for (int i = 0; i < productsList.length; i++) {
-			matrixProcessor.product[i]=productsList[i];
+			matrixProcessor.product[i] = productsList[i];
 		}
 		matrixProcessor.collect();
 	}
 
 	@Override
-	public void finish(Matrix mtrxSolution, int index) {
-		this.productsList[index-2]=mtrxSolution;
-		System.out.println("**********:" + mtrxSolution);
+	public void finish(Matrix mtrxSolution) {
+		this.productsList[Integer.valueOf(mtrxSolution.getName())] = mtrxSolution;
 	}
 }

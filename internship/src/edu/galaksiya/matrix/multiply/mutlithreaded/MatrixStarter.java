@@ -2,8 +2,6 @@ package edu.galaksiya.matrix.multiply.mutlithreaded;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import edu.galaksiya.distributer.IWorker;
 import edu.galaksiya.matrix.multiply.MatrixProcess;
 
 public class MatrixStarter {
@@ -15,6 +13,7 @@ public class MatrixStarter {
 		int[] order = { 0, 4, 1, 6, 0, 5, 1, 7, 2, 4, 3, 6, 2, 5, 3, 7 };
 
 		int counterIndex = 0;
+		
 		for (int i = 0; i < 8; i++) {
 			Operator thread = new Operator(aMatrix,
 					aMatrix.divides[order[counterIndex++]],

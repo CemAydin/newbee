@@ -14,6 +14,7 @@ public class HandleMultiply extends Action {
 	}
 
 	public Message act(Message message) {
+		
 		getiWorker()
 				.notifyListeners(
 						new Matrix(Matrix.deserialize(message.getMessage()),

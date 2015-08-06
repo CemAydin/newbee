@@ -4,6 +4,6 @@ import edu.galaksiya.matrix.Matrix;
 
 public interface WorkerListener {
 
-	public void finish(Matrix solution, int index);
+	public void finish(Matrix solution);
 
 }

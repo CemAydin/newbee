@@ -33,7 +33,7 @@ public class Multipler extends Action {
 		Matrix matrisA = constructMatrix(strMatrix1, "matrisA");
 		Matrix matrisB = constructMatrix(strMatrix2, "matrisB");
 		// Multiply Matrixes
-		int[][] intMatrixMult = matrisA.multiply(matrisA, matrisB);
+		int[][] intMatrixMult =Matrix.multiply(matrisA, matrisB);
 		
 		Matrix matrixMultix = new Matrix(intMatrixMult, "MultipledMatrix");
 		// Prepare messages

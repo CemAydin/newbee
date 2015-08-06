@@ -7,12 +7,12 @@ import edu.galaksiya.matrix.multiply.distributed.AddGiver;
 import edu.galaksiya.matrix.multiply.distributed.Adder;
 import edu.galaksiya.matrix.multiply.distributed.HandleMultiply;
 import edu.galaksiya.matrix.multiply.distributed.Multipler;
+import edu.galaksiya.matrix.multiply.distributed.Stopper;
 import edu.galaksiya.matrix.multiply.distributed.Visiting;
 import edu.galaksiya.matrix.multiply.distributed.Wellcomer;
 
-
 public class ActionFactory {
-	
+
 	public static Action creator(Message message, IWorker iWorker) {
 		Action action = null;
 		try {
@@ -28,6 +28,8 @@ public class ActionFactory {
 				action = new HandleMultiply(iWorker);
 			} else if (message.getAct().equals("Welcommer")) {
 				action = new Wellcomer(iWorker);
+			} else if (message.getAct().equals("Stopper")) {
+				action = new Stopper(iWorker);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

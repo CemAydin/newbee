@@ -175,7 +175,7 @@ public class MatrixProcess {
 		int temp3[][] = adder(product[a++], product[a++]);
 		int temp4[][] = adder(product[a++], product[a++]);
 		Matrix general = new Matrix(temp1.length + temp3.length,
-				temp1[0].length + temp2[0].length, "general");
+				temp1[0].length + temp2[0].length, "solution");
 
 		for (int k = 0; k < temp1.length; k++) {
 			for (int j = 0; j < temp1[0].length; j++) {
