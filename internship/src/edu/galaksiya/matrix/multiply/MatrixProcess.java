@@ -4,8 +4,6 @@ import java.util.Scanner;
 
 import edu.galaksiya.matrix.Matrix;
 
-;
-
 public class MatrixProcess {
 	// Before multiply
 	public Matrix matrixA;
@@ -18,16 +16,16 @@ public class MatrixProcess {
 	public MatrixProcess() {// consructor
 
 		Scanner console = new Scanner(System.in);
-
-		System.out.print("first matrix count of rows : ");
+		int n = 5, t = 5;
+		/*System.out.print("first matrix count of rows : ");
 		int n = console.nextInt();
 		System.out.print("first matrix count of column : ");
 		int t = console.nextInt();
-		matrixA = new Matrix(n, t, "matrixA");
-		System.out.print("second matrix count of rows : ");
-		n = console.nextInt();
+		*/matrixA = new Matrix(n, t, "matrixA");
+		/*System.out.print("second matrix count of rows : ");
+		 n = console.nextInt();
 		System.out.print("second matrix count of column : ");
-		t = console.nextInt();
+		t = console.nextInt();*/ 
 		console.close();
 		matrixB = new Matrix(n, t, "matrixB");
 		matrixA.initializing();
@@ -38,7 +36,7 @@ public class MatrixProcess {
 	public void divide() {// Matrisi daha küçük matrislere
 							// ayırarak işlemi daha kolay
 							// yaptık.
-							// Big matrix divide four piece to
+							// Big matrix divided four piece to
 							// make easy multiply
 		int k = (int) Math.ceil(matrixA.getwidth() / 2);
 		int n = (int) Math.ceil(matrixA.getlong() / 2);

@@ -14,12 +14,17 @@ public class HandleMultiply extends Action {
 	}
 
 	public Message act(Message message) {
-		
+
 		getiWorker()
 				.notifyListeners(
 						new Matrix(Matrix.deserialize(message.getMessage()),
 								"solution"));
-		message.setAct(Multipler.NAME);
+		try {
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		message.setAct("Stopper");
 		return message;
 	}
 }

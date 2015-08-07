@@ -12,6 +12,8 @@ public class Stopper extends Action {
 
 	@Override
 	public synchronized Message act(Message message) {	
+		
 		return null;
+
 	}
 }

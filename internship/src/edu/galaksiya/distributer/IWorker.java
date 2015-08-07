@@ -14,7 +14,7 @@ import edu.galaksiya.matrix.Matrix;
 public class IWorker implements Runnable {
 	Logger logger = Logger.getLogger(IWorker.class.getName());
 
-	protected Socket clientSocket;
+	private Socket clientSocket;
 	protected ObjectOutputStream out;
 	protected ObjectInputStream in;
 
@@ -36,11 +36,12 @@ public class IWorker implements Runnable {
 		super();
 		try {
 			logger.info("applying to server");
-			// * server 'a localhost ve 7755 portu üzerinden başlantı sağlanıyor
+			// * server 'a localhost ve 2347 portu üzerinden başlantı sağlanıyor
 			// *//
-			clientSocket = new Socket(Leader.SERVER_IP, Leader.SERVER_PORT);
-			out = new ObjectOutputStream(clientSocket.getOutputStream());
-			in = new ObjectInputStream(clientSocket.getInputStream());
+			setClientSocket(new Socket(Connector.SERVER_IP,
+					Connector.SERVER_PORT));
+			out = new ObjectOutputStream(getClientSocket().getOutputStream());
+			in = new ObjectInputStream(getClientSocket().getInputStream());
 			logger.info("applied to server");
 		} catch (Exception e) {
 			logger.severe(e.getMessage());
@@ -48,9 +49,9 @@ public class IWorker implements Runnable {
 			// oluşturduk *//
 	}
 
-	public IWorker(Socket clientSocket, int partsname) throws IOException {
-		this.partsname = partsname;
-		this.clientSocket = clientSocket;
+	public IWorker(Socket clientSocket) throws IOException {
+		this.setPartsname(partsname);
+		this.setClientSocket(clientSocket);
 		out = new ObjectOutputStream(clientSocket.getOutputStream());
 		in = new ObjectInputStream(clientSocket.getInputStream());
 	}
@@ -58,9 +59,9 @@ public class IWorker implements Runnable {
 	@Override
 	public void run() {
 		logger.info(String.format("%s{%s} waiting messages", Thread
-				.currentThread().getName(), getName()));
+				.currentThread().getName(), getName())
+				+ this.partsname);
 		while (activate) {
-
 			try {
 				readMessages();
 				Thread.sleep(50);
@@ -74,9 +75,11 @@ public class IWorker implements Runnable {
 													// and again sending message
 		Message msgIncoming = new Message(null);
 		try {
+			logger.info(String.valueOf(getPartsname()) + clientSocket);
 			while ((msgIncoming = (Message) in.readObject()).getMessage() != null) {
 				logger.info(String.format("%s{%s} read %s", Thread
-						.currentThread().getName(), name, msgIncoming));
+						.currentThread().getName(), name, msgIncoming)
+						+ this.partsname);
 
 				Message message = act(msgIncoming);
 				if (message != null)
@@ -118,14 +121,17 @@ public class IWorker implements Runnable {
 			activate = false;
 			out.close();
 			in.close();
-			clientSocket.close();
+			getClientSocket().close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public synchronized void addListener(Leader newListener) {
-		this.getListeners().add(newListener);
+
+		this.getListeners();
+		if (this.listeners.contains(newListener) == false)
+			this.listeners.add(newListener);
 	}
 
 	public void notifyListeners(Matrix solution) {
@@ -133,8 +139,8 @@ public class IWorker implements Runnable {
 		// then notify leader
 
 		for (WorkerListener listener : getListeners()) {
-			solution.setName(String.valueOf(partsname));
-			listener.finish(solution);
+			solution.setName(String.valueOf(getPartsname()));
+			listener.finish(solution, this);
 		}
 	}
 
@@ -150,5 +156,21 @@ public class IWorker implements Runnable {
 
 	public String getName() {
 		return name;
+	}
+
+	protected Socket getClientSocket() {
+		return clientSocket;
+	}
+
+	protected void setClientSocket(Socket clientSocket) {
+		this.clientSocket = clientSocket;
+	}
+
+	public int getPartsname() {
+		return partsname;
+	}
+
+	public void setPartsname(int partsname) {
+		this.partsname = partsname;
 	}
 }
