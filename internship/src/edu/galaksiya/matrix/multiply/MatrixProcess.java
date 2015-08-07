@@ -16,16 +16,15 @@ public class MatrixProcess {
 	public MatrixProcess() {// consructor
 
 		Scanner console = new Scanner(System.in);
-		int n = 5, t = 5;
-		/*System.out.print("first matrix count of rows : ");
+		System.out.print("first matrix count of rows : ");
 		int n = console.nextInt();
 		System.out.print("first matrix count of column : ");
 		int t = console.nextInt();
-		*/matrixA = new Matrix(n, t, "matrixA");
-		/*System.out.print("second matrix count of rows : ");
+		matrixA = new Matrix(n, t, "matrixA");
+		System.out.print("second matrix count of rows : ");
 		 n = console.nextInt();
 		System.out.print("second matrix count of column : ");
-		t = console.nextInt();*/ 
+		t = console.nextInt();
 		console.close();
 		matrixB = new Matrix(n, t, "matrixB");
 		matrixA.initializing();

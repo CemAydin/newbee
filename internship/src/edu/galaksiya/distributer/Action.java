@@ -10,7 +10,7 @@ public abstract class Action {
 		this.iWorker = iWorker;
 	}
 
-	abstract public Message act(Message message);
+	abstract  public  Message  act(Message message);
 	
 	public IWorker getiWorker() {
 		return iWorker;

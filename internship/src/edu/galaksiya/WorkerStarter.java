@@ -12,8 +12,10 @@ public class WorkerStarter {
 																// türetir.//New
 																// worker
 																// created.
-
-		for (int i = 0; i < 1; i++) {
+		System.out.println("please write number how much worker do you want to create\n if your process chat or add two number write 1.");
+		Scanner console=new Scanner(System.in);
+		int count=console.nextInt();
+		for (int i = 0; i < count; i++) {
 			IWorker worker = new IWorker();
 			worker.setName("Client");
 			Thread wThread = new Thread(worker);

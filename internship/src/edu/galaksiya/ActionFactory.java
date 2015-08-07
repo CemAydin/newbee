@@ -13,7 +13,7 @@ import edu.galaksiya.matrix.multiply.distributed.Wellcomer;
 
 public class ActionFactory {
 
-	public static Action creator(Message message, IWorker iWorker) {
+	public synchronized static Action creator(Message message, IWorker iWorker) {
 		Action action = null;
 		try {
 			if (message.getAct().equals(AddGiver.NAME)) {

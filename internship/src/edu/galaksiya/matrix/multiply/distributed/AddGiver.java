@@ -18,9 +18,9 @@ public class AddGiver extends Action {
 
 	public synchronized Message act(Message message) {
 		System.out.println("total="+message.getMessage());
-		System.out.println("toplamak istediğiniz sayılardan ilkini girin");
+		System.out.println("Write first number");
 		int temp = console.nextInt();
-		System.out.println("toplamak istediğiniz sayılardan ikincisini girin");
+		System.out.println("write second number");
 		int temp1 = console.nextInt();
 		String tempString = String.valueOf(temp);
 		tempString+="/";

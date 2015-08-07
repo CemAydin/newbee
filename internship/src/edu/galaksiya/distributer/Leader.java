@@ -32,8 +32,6 @@ public class Leader implements WorkerListener, Runnable, SocketListener {
 	public Leader() throws IOException {
 		logger.setLevel(Level.FINEST);
 		// Getting started to work;
-		logger.info("starting");
-		logger.info("started");
 		System.out
 				.println("please write What do you want to do \n	1-	Chat each other\n	2-	add two number	\n	3-	matrix process");
 		menuChoice = console.nextInt();
