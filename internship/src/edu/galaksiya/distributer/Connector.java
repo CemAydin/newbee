@@ -9,7 +9,7 @@ import edu.galaksiya.distributer.IWorker;
 
 ;
 
-public class Connector implements Runnable {
+public class Connector implements Runnable {//This class make new socket connection//.Bu sınıf yeni  soket bağlantısı kurmak için.
 
 	private ArrayList<SocketListener> listeners;
 	public IWorker workerRef;
@@ -48,11 +48,11 @@ public class Connector implements Runnable {
 		}
 	}
 
-	public Socket socketAccepting() throws IOException {
+	public Socket socketAccepting() throws IOException {//soket kabul etme.
 		return serverSocket.accept();// add incoming connection to
 	}
 
-	public void initializing() throws IOException {
+	public void initializing() throws IOException {//ilkleme.
 		workerRef.setName(SERVER);
 		Thread wrThread = new Thread(workerRef);
 		wrThread.start();
@@ -66,7 +66,7 @@ public class Connector implements Runnable {
 		}
 	}
 
-	public synchronized void addListener(Leader newListener) {
+	public synchronized void addListener(Leader newListener) {//Yeni dinleyici ekle.//add new listener.
 
 		this.getListeners();
 		if (this.listeners.contains(newListener) == false)

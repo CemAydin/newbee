@@ -6,22 +6,21 @@ import edu.galaksiya.distributer.Message;
 
 public class Adder extends Action {
 
-	private int valueA;
-	private int valueB;
+	public static final String NAME = "Adder";
 
 	public Adder(IWorker iWorker) {
 		super(iWorker);
 	}
 
-
 	@Override
 	public synchronized Message act(Message message) {
-		valueA = Integer.parseInt(message.getMessage());
-		valueB = Integer.parseInt(message.getMessage());
+		String[] strMessage = message.getMessage().split("/");
+		int valueA = Integer.valueOf(strMessage[0]);
+		int valueB = Integer.valueOf(strMessage[1]);
 		int temp = valueA + valueB;
-		System.out.println(temp);
+		System.out.println("valueA=" + valueA + "\n" + "valueB=" + valueB);
 		message.setMessage(String.valueOf(temp));
-		message.setAct("AddGiver");
+		message.setAct(AddGiver.NAME);
 		return message;
 	}
 }

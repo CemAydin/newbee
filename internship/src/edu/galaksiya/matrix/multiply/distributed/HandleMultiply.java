@@ -24,7 +24,7 @@ public class HandleMultiply extends Action {
 			e.printStackTrace();
 		}
 
-		message.setAct("Stopper");
+		message.setAct(Stopper.NAME);
 		return message;
 	}
 }

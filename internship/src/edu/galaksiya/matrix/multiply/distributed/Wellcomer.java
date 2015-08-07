@@ -7,21 +7,23 @@ import edu.galaksiya.distributer.IWorker;
 import edu.galaksiya.distributer.Message;
 
 public class Wellcomer extends Action {
+	public static final String NAME = "Wellcomer";
 
 	public Wellcomer(IWorker iWorker) {
 		super(iWorker);
 	}
 
 	@Override
-	public Message act(Message message) {
+	public Message act(Message message) {//method for take Server message//Server'in mesajını almak için bir method.
 		Scanner keyboard = new Scanner(System.in);
 		System.out.print("Ben Welcommer mesajınızı yazın ");
-		String strMessage = keyboard.nextLine();
+		System.out.println(Thread.currentThread().getName()+this.getiWorker().getName());
+		String strMessage = "";
+		strMessage = keyboard.nextLine();
 		strMessage = "Wellcome 	------->	" + strMessage;
 		message.setMessage(strMessage);
-		message.setAct("Visiting");
+		message.setAct(Visiting.NAME);
 		System.out.println(strMessage);
-		keyboard.close();
 		return message;
 	}
 }

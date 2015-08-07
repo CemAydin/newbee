@@ -8,18 +8,22 @@ import edu.galaksiya.distributer.Message;
 
 public class AddGiver extends Action {
 
+	public static final String NAME = "AddGiver";
+
 	Scanner console = new Scanner(System.in);
-	
+
 	public AddGiver(IWorker iWorker) {
 		super(iWorker);
 	}
 
 	public synchronized Message act(Message message) {
+		System.out.println("total="+message.getMessage());
 		System.out.println("toplamak istediğiniz sayılardan ilkini girin");
 		int temp = console.nextInt();
 		System.out.println("toplamak istediğiniz sayılardan ikincisini girin");
 		int temp1 = console.nextInt();
 		String tempString = String.valueOf(temp);
+		tempString+="/";
 		tempString += String.valueOf(temp1);
 		message.setMessage(tempString);
 		message.setAct("Adder");

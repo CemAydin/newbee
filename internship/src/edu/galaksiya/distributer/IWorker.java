@@ -32,7 +32,7 @@ public class IWorker implements Runnable {
 	 * @throws IOException
 	 *             in case of any connection error.
 	 */
-	public IWorker() throws UnknownHostException, IOException {
+	public IWorker() throws UnknownHostException, IOException {//consructor for client
 		super();
 		try {
 			logger.info("applying to server");
@@ -49,7 +49,7 @@ public class IWorker implements Runnable {
 			// oluşturduk *//
 	}
 
-	public IWorker(Socket clientSocket) throws IOException {
+	public IWorker(Socket clientSocket) throws IOException {//consructor for server object.
 		this.setPartsname(partsname);
 		this.setClientSocket(clientSocket);
 		out = new ObjectOutputStream(clientSocket.getOutputStream());
@@ -72,7 +72,7 @@ public class IWorker implements Runnable {
 	}
 
 	private void readMessages() throws IOException {// reading coming message
-													// and again sending message
+													// and again sending message//Karşıdan gelen mesajı okumak için.
 		Message msgIncoming = new Message(null);
 		try {
 			logger.info(String.valueOf(getPartsname()) + clientSocket);
@@ -91,7 +91,7 @@ public class IWorker implements Runnable {
 		}
 	}
 
-	// Sending message server-client each other
+	// Sending message server-client each other//Mesaj gönderme methodu.
 	public void sendMessage(Message message) {
 		try {
 			logger.info(String.format("%s{%s} sending %s", Thread
@@ -116,7 +116,7 @@ public class IWorker implements Runnable {
 	 * @param data
 	 * @throws IOException
 	 */
-	public void stop() {
+	public void stop() {//stop all process//Bütün işleri durdurmak için.
 		try {
 			activate = false;
 			out.close();
@@ -127,14 +127,14 @@ public class IWorker implements Runnable {
 		}
 	}
 
-	public synchronized void addListener(Leader newListener) {
+	public synchronized void addListener(Leader newListener) {// yeni dinleyen ekleme.//add new listener.
 
 		this.getListeners();
 		if (this.listeners.contains(newListener) == false)
 			this.listeners.add(newListener);
 	}
 
-	public void notifyListeners(Matrix solution) {
+	public void notifyListeners(Matrix solution) {//to notify which object listen this//dinleyen nesneleri uyarıcı.
 		// değişim olmuşsa lideri uyar.If there is a change at finish
 		// then notify leader
 
@@ -144,7 +144,7 @@ public class IWorker implements Runnable {
 		}
 	}
 
-	private ArrayList<WorkerListener> getListeners() {
+	private ArrayList<WorkerListener> getListeners() {//to get  listened list//Dinleyenleri getirmek için.
 		if (this.listeners == null)
 			this.listeners = new ArrayList<WorkerListener>();
 		return listeners;

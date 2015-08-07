@@ -5,7 +5,7 @@ import edu.galaksiya.distributer.IWorker;
 import edu.galaksiya.distributer.Message;
 
 public class Stopper extends Action {
-
+	public static final String NAME = "Stopper";
 	public Stopper(IWorker iWorker) {
 		super(iWorker);
 	}

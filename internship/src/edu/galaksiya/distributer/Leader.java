@@ -9,7 +9,9 @@ import java.util.logging.Logger;
 
 import edu.galaksiya.matrix.Matrix;
 import edu.galaksiya.matrix.multiply.MatrixProcess;
+import edu.galaksiya.matrix.multiply.distributed.AddGiver;
 import edu.galaksiya.matrix.multiply.distributed.Multipler;
+import edu.galaksiya.matrix.multiply.distributed.Wellcomer;
 
 public class Leader implements WorkerListener, Runnable, SocketListener {
 
@@ -33,22 +35,21 @@ public class Leader implements WorkerListener, Runnable, SocketListener {
 		logger.info("starting");
 		logger.info("started");
 		System.out
-				.println("lütfen yapmak istediğiniz işlem için seçim yapın \n	1-	Mesajlaşma\n	2-	toplama işlemi\n	3-	matris işlemleri ");
+				.println("please write What do you want to do \n	1-	Chat each other\n	2-	add two number	\n	3-	matrix process");
 		menuChoice = console.nextInt();
 		if (menuChoice == 3) {
 			matrixProcessor = new MatrixProcess();
 			matrixProcessor.divide();
-			addProduct();
+			addDividies();
 		}
 	}
 
-	public void addProduct() {
+	public void addDividies() {// Big matrix patrs added in Arraylist Dividies
 		int[] order = { 0, 4, 1, 6, 0, 5, 1, 7, 2, 4, 3, 6, 2, 5, 3, 7 };
 
 		for (int i = 0; i < order.length; i++) {
 			dividies.add(matrixProcessor.divides[order[i]]);
 		}
-
 	}
 
 	/**
@@ -60,23 +61,34 @@ public class Leader implements WorkerListener, Runnable, SocketListener {
 		}
 	}
 
-	public void workPart() {
+	public void workPart() {// decided to what work to do // hangi iş
+							// yapılacağına karar veriyoruz.
 		try {
 
-			IWorker currentREf = toInfrastructure();
+			IWorker currentREf = WorkerRefGetter();
 			currentREf.setPartsname(countParts++);
 			currentREf.addListener(this);
 
 			if (menuChoice == 1) {
-				firstMessage(currentREf, "basla", "Welcommer");
+				firstMessage(currentREf, "basla", Wellcomer.NAME);
 			} else if (menuChoice == 2) {
-				firstMessage(currentREf, "basla", "AddGiver");
+				firstMessage(currentREf, "basla", AddGiver.NAME);
 			} else if (menuChoice == 3) {
 				String serializedMatrix = "";
 				serializedMatrix = dividies.get(counterDivides++).serialize();
 				serializedMatrix += dividies.get(counterDivides++).serialize();
 
-				firstMessage(currentREf, serializedMatrix, Multipler.NAME);
+				firstMessage(currentREf, serializedMatrix, Multipler.NAME);// first
+																			// message
+																			// sending
+																			// by
+																			// leader
+																			// via
+																			// workerref.//Workerref
+																			// üzerinden
+																			// ilk
+																			// mesaj
+																			// gönderiliyor
 
 			}
 		} catch (Exception e) {
@@ -84,7 +96,12 @@ public class Leader implements WorkerListener, Runnable, SocketListener {
 		}
 	}
 
-	public IWorker toInfrastructure() throws IOException {
+	public IWorker WorkerRefGetter() throws IOException {// Method get a
+															// workerref through
+															// Workerlist//workerlist
+															// içinden ilşlk
+															// workerref'i
+															// getirir.
 		while (workers.isEmpty()) {
 			try {
 				Thread.sleep(5);
@@ -92,16 +109,7 @@ public class Leader implements WorkerListener, Runnable, SocketListener {
 				e.printStackTrace();
 			}
 		}
-		System.out.println("workersın eleman sayısı" + workers.size());
-		for (IWorker refWorker : workers) {
-			logger.info(String.valueOf(refWorker.getPartsname()));
-		}
 		IWorker firstWorkerRef = workers.remove(0);
-		logger.info("workersten yeni eleman çekildi");
-		System.out.println("workersın eleman sayısı" + workers.size());
-		for (IWorker refWorker : workers) {
-			System.out.println(refWorker.getPartsname());
-		}
 		return firstWorkerRef;
 	}
 
@@ -113,31 +121,54 @@ public class Leader implements WorkerListener, Runnable, SocketListener {
 
 	@Override
 	public void run() {
-		Connector connect = new Connector();
+		Connector connect = new Connector();// listening Socket //if there is a
+											// client then connect object inform
+											// leader and leader add it
+											// list.//Socketlet dinliyor eğer
+											// yani client varsa lider uyarılır
+											// ve yani client listeye eklenir.
 		Thread connectThread = new Thread(connect);
 		connect.addListener(this);
 		connectThread.start();
 		for (int i = 0; i < 8; i++) {
 			workPart();
 		}
-		try {
-			Thread.sleep(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+		if (menuChoice == 3) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			for (Matrix matrix : this.productsList) {
+				System.out.println("Part");
+				System.out.println("____________________________________");
+				matrix.write();
+			}
+			for (int i = 0; i < productsList.length; i++) {
+				matrixProcessor.product[i] = productsList[i];
+			}
+			matrixProcessor.collect();
 		}
-		for (Matrix matrix : this.productsList) {
-			System.out.println("Part");
-			System.out.println("____________________________________");
-			matrix.write();
-		}
-		for (int i = 0; i < productsList.length; i++) {
-			matrixProcessor.product[i] = productsList[i];
-		}
-		matrixProcessor.collect();
 	}
 
 	@Override
-	public void finish(Matrix mtrxSolution, IWorker iworker) {
+	public void finish(Matrix mtrxSolution, IWorker iworker) {// it inform
+																// leader about
+																// Matrix
+																// process//When
+																// matrix
+																// multiply
+																// finished.İts
+																// inform leader
+																// and its said
+																// "thats is solution"//Matris
+																// çarpma
+																// işleminde
+																// çarpım
+																// bittiği zaman
+																// lideri uyarır
+																// va çarpımı
+																// döndürür.
 		this.productsList[Integer.valueOf(mtrxSolution.getName())] = mtrxSolution;
 		workers.add(iworker);
 		System.out.println("bir kişi workerse listeye eklendi"
@@ -145,7 +176,11 @@ public class Leader implements WorkerListener, Runnable, SocketListener {
 	}
 
 	@Override
-	public void newSocketAccepting(IWorker newWorkerRef) {
-		workers.add(newWorkerRef);
+	public void newSocketAccepting(IWorker newWorkerRef) {// Inform leader When
+															// there is a new
+															// client//Yeni bir
+															// client başvurursa
+															// lideri uyarır.
+		workers.add(newWorkerRef);// And leader add it in list
 	}
 }

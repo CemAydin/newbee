@@ -8,10 +8,10 @@ public class Message implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private String act;
-	private String message;
+	private String act;//which type of message.//Mesajın türü.
+	private String message;//contents of message.Mesajın içeriği.
 
-	public Message(String act) {
+	public Message(String act) {//consructer.
 		this.setAct(act);
 	}
 
