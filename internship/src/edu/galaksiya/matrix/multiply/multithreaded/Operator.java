@@ -1,4 +1,4 @@
-package edu.galaksiya.matrix.multiply.mutlithreaded;
+package edu.galaksiya.matrix.multiply.multithreaded;
 
 import edu.galaksiya.matrix.Matrix;
 import edu.galaksiya.matrix.multiply.MatrixProcess;

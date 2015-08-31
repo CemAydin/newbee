@@ -1,4 +1,4 @@
-package edu.galaksiya.matrix.multiply.mutlithreaded;
+package edu.galaksiya.matrix.multiply.multithreaded;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,10 +10,10 @@ public class MatrixStarter {
 		List<Operator> workers = new ArrayList<Operator>();
 		MatrixProcess aMatrix = new MatrixProcess();
 		aMatrix.divide();
-		int[] order = { 0, 4, 1, 6, 0, 5, 1, 7, 2, 4, 3, 6, 2, 5, 3, 7 };
-
-		int counterIndex = 0;
 		
+		int[] order = { 0, 4, 1, 6, 0, 5, 1, 7, 2, 4, 3, 6, 2, 5, 3, 7 };
+		int counterIndex = 0;
+
 		for (int i = 0; i < 8; i++) {
 			Operator thread = new Operator(aMatrix,
 					aMatrix.divides[order[counterIndex++]],

@@ -9,6 +9,9 @@ public class Matrix {
 	private int matrix[][];
 	private String name;
 
+	public Matrix() {
+	}
+
 	public Matrix(int row, int column, String name) {
 		setMatrix(new int[row][column]);
 		longer = row;
@@ -39,9 +42,9 @@ public class Matrix {
 				this.getMatrix()[i][j] = (i + 1) * (j + 1);
 			}
 		}
-	}// Matrislerin ilk değerleri atandı.
+	}// Matrislerin ilk degerleri atandi.
 
-	public void write() {// Matrisi ekrana yazırmak için.// it's
+	public void write() {// Matrisi ekrana yazdırmak icin.// it's
 		// just for wiriting.
 		System.out.println(this.name);
 		for (int i = 0; i < this.getMatrix().length; i++) {

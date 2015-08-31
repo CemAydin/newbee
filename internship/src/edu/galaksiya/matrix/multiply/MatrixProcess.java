@@ -1,7 +1,6 @@
 package edu.galaksiya.matrix.multiply;
 
 import java.util.Scanner;
-
 import edu.galaksiya.matrix.Matrix;
 
 public class MatrixProcess {
@@ -21,16 +20,26 @@ public class MatrixProcess {
 		System.out.print("first matrix count of column : ");
 		int t = console.nextInt();
 		matrixA = new Matrix(n, t, "matrixA");
-		System.out.print("second matrix count of rows : ");
-		 n = console.nextInt();
+		int k;
+		do {
+			System.out.print("second matrix count of rows : ");
+			k = console.nextInt();
+		} while (t != k);
 		System.out.print("second matrix count of column : ");
 		t = console.nextInt();
 		console.close();
-		matrixB = new Matrix(n, t, "matrixB");
+		matrixB = new Matrix(k, t, "matrixB");
 		matrixA.initializing();
 		matrixB.initializing();
 
 	}// Create matrixA and matrixB(matris a ve b yi oluşturduk)
+
+	public MatrixProcess(int longA, int witdhA, int longB, int withdB) {
+		matrixA = new Matrix(longA, witdhA, "matrixA");
+		matrixB = new Matrix(longB, withdB, "matrixB");
+		matrixA.initializing();
+		matrixB.initializing();
+	}
 
 	public void divide() {// Matrisi daha küçük matrislere
 							// ayırarak işlemi daha kolay
@@ -142,7 +151,6 @@ public class MatrixProcess {
 		} else if (matrix1.getName() == "divA22"
 				&& matrix2.getName() == "divB22") {
 			product[7] = new Matrix(new1, "carpim8");
-
 		}
 	}
 
